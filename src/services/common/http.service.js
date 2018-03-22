@@ -7,11 +7,13 @@
 
     httpService.$inject = [
         '$http',
-        '$q'];
+        '$q',
+        '$window'];
 
     function httpService(
         $http,
-        $q) {
+        $q,
+        $window) {
 
         var service = {
             post: post,

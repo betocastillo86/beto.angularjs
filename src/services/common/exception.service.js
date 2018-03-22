@@ -5,7 +5,7 @@
         .module('beto.core.services')
         .factory('coreExceptionService', exceptionService);
 
-    exceptionService.$inject = ['modalService'];
+    exceptionService.$inject = ['coreModalService'];
 
     function exceptionService(modalService) {
         var service = {

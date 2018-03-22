@@ -65,7 +65,7 @@
                     .catch(consoleError);
             }
             else {
-                getTemplate(templateService.getComponent('modal/modal-' + options.modalType))
+                getTemplate(templateService.get('modal/modal-' + options.modalType))
                     .then(templateLoaded)
                     .catch(consoleError);
             }

@@ -9,10 +9,10 @@
         return {
             require: 'ngModel',
             scope: {
-                otherValue: '=compareTo'
+                otherValue: '=coreCompareTo'
             },
             link: function (scope, element, attributes, ngModel) {
-                ngModel.$validators.compareTo = function (modelValue) {
+                ngModel.$validators.coreCompareTo = function (modelValue) {
                     return modelValue === scope.otherValue;
                 }
 

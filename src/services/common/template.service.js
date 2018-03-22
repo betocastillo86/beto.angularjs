@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('hostaliandoServices')
+        .module('beto.core.services')
         .constant("coreTemplateService", {
             "get": function(name) {
                 return '/' + name + '.html';

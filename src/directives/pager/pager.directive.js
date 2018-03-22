@@ -7,7 +7,7 @@
     function listPager(templateService) {
         var directive = {
             restrict: 'E',
-            templateUrl: templateService.get('directives/pager'),
+            templateUrl: templateService.get('pager/pager'),
             controller: 'PagerController',
             controllerAs: 'pager',
             scope: {

@@ -5,9 +5,9 @@
         .module('beto.core.directives')
         .directive('coreAdsense', coreAdsense);
 
-    coreAdsense.$inject = ['$timeout', 'adsenseService'];
+    coreAdsense.$inject = ['$timeout'];
     
-    function coreAdsense($timeout, adsenseService) {
+    function coreAdsense($timeout) {
         var directive = {
             restrict: 'A',
             scope: {

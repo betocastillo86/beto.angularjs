@@ -10,7 +10,8 @@
     {
         var service = {
             goToFocus: goToFocus, 
-            goToFocusError: goToFocusError
+            goToFocusError: goToFocusError,
+            enableLeavingPageMode: enableLeavingPageMode
         };
 
         return service;

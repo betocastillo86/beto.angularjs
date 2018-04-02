@@ -72,5 +72,9 @@
 
             return disableEvent;
         }
+
+        function handleUnloadEvent(event) {
+            event.returnValue = "Your warning text";
+        };
     }
 })();

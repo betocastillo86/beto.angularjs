@@ -26,6 +26,7 @@
             scope: $rootScope,
             controllerAs: 'modal',
             title: 'Mensaje',
+            image: undefined,
             redirectAfterClose: undefined,
             closed: undefined,
             onClosed: undefined
@@ -88,6 +89,7 @@
                 scope.close = close;
                 scope.message = options.message;
                 scope.title = options.title;
+                scope.image = options.image;
                 scope.large = options.large;
                 scope.params = options.params;
 

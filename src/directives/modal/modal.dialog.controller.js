@@ -12,6 +12,7 @@
         vm.title = $scope.title;
         vm.message = $scope.message;
         vm.large = $scope.large;
+        vm.image = $scope.image;
 
         vm.cancel = cancel;
         vm.accept = accept;

@@ -13,7 +13,8 @@
         vm.message = $scope.message;
         vm.large = $scope.large;
         vm.image = $scope.image;
-        
+        vm.params = $scope.params;
+
         vm.close = close;
 
         function close() {

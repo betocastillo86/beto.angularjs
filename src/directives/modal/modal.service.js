@@ -123,11 +123,6 @@
                 modal.element.on('hidden.bs.modal', function () {
                     console.log('Entra al evento de cerrado');
                     close({ previousClosed: true });
-
-                    if (document.getElementsByClassName('modal').length)
-                    {
-                        document.body.classList.add('modal-open');
-                    }
                 })
                 //calls the modal before resolving promise
                 if (!modal.element.modal) {
@@ -144,11 +139,9 @@
                     closeDeferred.resolve(result);
 
                     if (!result.previousClosed) {
-                        modal.element.modal('toggle');
                         modal.element.off('hidden.bs.modal');
-                        
-                        //modal.element.data('bs.modal', null);
-                        //modal.element.remove();
+                        modal.element.modal('hide');
+                        modal.element.data('bs.modal').$backdrop.remove();
                     }
 
                     scope.$destroy();
@@ -162,10 +155,16 @@
                     rootScopeOnClose && rootScopeOnClose();
 
                     if (options.redirectAfterClose) {
-                        $location.path(options.redirectAfterClose);
+                        $rootScope.$apply(function(){
+                            $location.path(options.redirectAfterClose);
+                        });
                     }
 
                     $(modal.element).data('bs.modal', null).remove();
+
+                    if (document.getElementsByClassName('modal').length) {
+                        document.body.classList.add('modal-open');
+                    }
                 }
 
                 function validateZindex()
@@ -251,5 +250,5 @@
             return show(options);
         }
     }    
-
+    
 })();

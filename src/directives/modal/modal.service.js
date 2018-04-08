@@ -121,8 +121,13 @@
                 };
 
                 modal.element.on('hidden.bs.modal', function () {
+                    console.log('Entra al evento de cerrado');
                     close({ previousClosed: true });
-                    $(this).data('bs.modal', null).remove();
+
+                    if (document.getElementsByClassName('modal').length)
+                    {
+                        document.body.classList.add('modal-open');
+                    }
                 })
                 //calls the modal before resolving promise
                 if (!modal.element.modal) {
@@ -131,14 +136,17 @@
 
                 modal.element.modal();
 
+                validateZindex();
+
                 deferred.resolve(modal);
 
                 function close(result) {
                     closeDeferred.resolve(result);
 
                     if (!result.previousClosed) {
-                        modal.element.off('hidden.bs.modal');
                         modal.element.modal('toggle');
+                        modal.element.off('hidden.bs.modal');
+                        
                         //modal.element.data('bs.modal', null);
                         //modal.element.remove();
                     }
@@ -155,6 +163,24 @@
 
                     if (options.redirectAfterClose) {
                         $location.path(options.redirectAfterClose);
+                    }
+
+                    $(modal.element).data('bs.modal', null).remove();
+                }
+
+                function validateZindex()
+                {
+                    var modals = $('.modal');
+                    if(modals.length > 1)
+                    {
+                        var backgrous = $('.modal-backdrop');
+                        for (var i = 0; i < modals.length; i++) {
+                            var modal = $(modals[i]);
+                            var backgroud = backgrous[i];
+                            var newZIndex = parseInt(modal.css('zIndex')) + (i * 10)
+                            modal.css('zIndex', newZIndex);
+                            backgroud.style.zIndex = newZIndex - 1;
+                        }
                     }
                 }
 
@@ -224,6 +250,6 @@
             options.title = options.title || 'Importante';
             return show(options);
         }
-    }
+    }    
 
 })();

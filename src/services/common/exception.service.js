@@ -5,9 +5,16 @@
         .module('beto.core.services')
         .factory('coreExceptionService', exceptionService);
 
-    exceptionService.$inject = ['coreModalService'];
+    exceptionService.$inject = [
+        '$rootScope',
+        '$location',
+        'coreModalService'];
 
-    function exceptionService(modalService) {
+    function exceptionService(
+        modalService,
+        $rootScope,
+        $location) {
+
         var service = {
             handle: handle
         };
@@ -21,6 +28,11 @@
             }
             else if (exception.status == 401) {
                 modalService.showError({ message: 'Debes estar autenticado para realizar esta acción' });
+            }
+            else if (exception.status == 404 && app.Settings.redirect404) {
+                $rootScope.$apply(function(){
+                    $location.path(app.Settings.redirect404);
+                });
             }
             else {
                 if (exception.data) {

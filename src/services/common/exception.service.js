@@ -6,14 +6,12 @@
         .factory('coreExceptionService', exceptionService);
 
     exceptionService.$inject = [
-        '$rootScope',
         '$location',
         'coreModalService'];
 
     function exceptionService(
-        modalService,
-        $rootScope,
-        $location) {
+        $location,
+        modalService) {
 
         var service = {
             handle: handle
@@ -30,9 +28,7 @@
                 modalService.showError({ message: 'Debes estar autenticado para realizar esta acción' });
             }
             else if (exception.status == 404 && app.Settings.redirect404) {
-                $rootScope.$apply(function(){
-                    $location.path(app.Settings.redirect404);
-                });
+                $location.path(app.Settings.redirect404);
             }
             else {
                 if (exception.data) {

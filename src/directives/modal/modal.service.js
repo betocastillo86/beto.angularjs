@@ -146,7 +146,7 @@
 
                 validateZindex();
 
-                validateAutoClose();
+                validateAutoClose(modal);
 
                 deferred.resolve(modal);
 
@@ -202,7 +202,7 @@
                 {
                     if(modal.autoClose > 0)
                     {
-                        $timeout(close(), modal.autoClose);
+                        $timeout(function () { close({}); }, modal.autoClose);
                     }
                 }
 

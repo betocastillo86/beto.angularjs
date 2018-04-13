@@ -13,9 +13,20 @@
         '$controller', 
         '$document', 
         '$location', 
+        '$timeout',
         'coreTemplateService'];
 
-    function modalService($q, $templateRequest, $rootScope, $compile, $controller, $document, $location, templateService) {
+    function modalService(
+        $q,
+        $templateRequest, 
+        $rootScope, 
+        $compile, 
+        $controller, 
+        $document, 
+        $location, 
+        $timeout,
+        templateService) {
+
         var vm = this;
         vm.show = show;
         vm.showError = showError;
@@ -29,7 +40,8 @@
             image: undefined,
             redirectAfterClose: undefined,
             closed: undefined,
-            onClosed: undefined
+            onClosed: undefined,
+            autoClose: 0
         };
 
         return vm;
@@ -117,7 +129,8 @@
                     scope: scope,
                     element: modalElement,
                     close: closeDeferred.promise,
-                    closed: closedDeferred.promise
+                    closed: closedDeferred.promise,
+                    autoClose: options.autoClose
                 };
 
                 modal.element.on('hidden.bs.modal', function () {
@@ -132,6 +145,8 @@
                 modal.element.modal();
 
                 validateZindex();
+
+                validateAutoClose();
 
                 deferred.resolve(modal);
 
@@ -183,6 +198,14 @@
                     }
                 }
 
+                function validateAutoClose(modal)
+                {
+                    if(modal.autoClose > 0)
+                    {
+                        $timeout(close(), modal.autoClose);
+                    }
+                }
+
                 function appendElement(parent, child) {
                     //var children = parent.children();
                     //if (children.length > 0) {
@@ -211,6 +234,8 @@
                 }
             }
         }
+
+        
 
         function showError(options) {
             var options = options || {};

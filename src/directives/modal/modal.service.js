@@ -112,7 +112,16 @@
 
                 var controllerObjBefore = scope[options.controllerAs];
 
-                var controller = $controller(getControllerName(options), inputs, false, options.controllerAs);
+                var controller = null;
+                
+                try
+                {
+                    $controller(getControllerName(options), inputs, false, options.controllerAs);
+                }
+                catch(ex)
+                {
+                    console.error("Error cargando modal", ex);
+                }
 
                 if (options.controllerAs && controllerObjBefore) {
                     angular.extend(controller, controllerObjBefore);
@@ -179,6 +188,9 @@
 
                     if (document.getElementsByClassName('modal').length) {
                         document.body.classList.add('modal-open');
+                    }
+                    else{
+                        document.body.classList.remove('modal-open');
                     }
                 }
 

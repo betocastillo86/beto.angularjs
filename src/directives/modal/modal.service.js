@@ -116,7 +116,7 @@
                 
                 try
                 {
-                    $controller(getControllerName(options), inputs, false, options.controllerAs);
+                    controller = $controller(getControllerName(options), inputs, false, options.controllerAs);
                 }
                 catch(ex)
                 {

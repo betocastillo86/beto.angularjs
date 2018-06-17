@@ -90,7 +90,14 @@
                 hideLoading();
             }
 
-            defered.resolve(response.data);
+            var theresponse = response.data;
+
+            if (params && params.originalResponse)
+            {
+                theresponse = response;
+            }
+
+            defered.resolve(theresponse);
         }
 
         function GetFailed(defered, params, response) {

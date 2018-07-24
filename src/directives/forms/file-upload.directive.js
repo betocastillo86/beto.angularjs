@@ -15,7 +15,8 @@
                 defaultname: '@',
                 validextensions: '@',
                 validatehorizontal: '@',
-                url: '@'
+                url: '@',
+                maxSize: '@'
             }
         };
 
@@ -45,9 +46,10 @@
                 var validExtensionsRegex = scope.validextensions ? new RegExp(scope.validextensions, 'i') : null;
                 var serviceUrl = scope.url || '/api/v1/files';
                 var validatehorizontal = scope.validatehorizontal ? scope.validatehorizontal : false;
+                var maxRequestFileUploadMB = (scope.maxSize || 5)* 1024 * 1024;
 
                 for (var i = 0; i < fileUpload.files.length; i++) {
-                    if (fileUpload.files[i].size > app.Settings.security.maxRequestFileUploadMB * 1024 * 1024) {
+                    if (fileUpload.files[i].size > maxRequestFileUploadMB) {
                         errorSize = true;
                     }
                     else if (validExtensionsRegex && !validExtensionsRegex.test(fileUpload.files[i].name)) {
@@ -65,13 +67,13 @@
                 if (errorSize) {
                     var message = '';
                     if (fileUpload.files.length == 1) {
-                        message = 'El archivo no puede exceder las ' + app.Settings.security.maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
+                        message = 'El archivo no puede exceder las ' + maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
                     }
                     else if (iFileSent == 0) {
-                        message = 'Los archivos no pueden exceder las ' + app.Settings.security.maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
+                        message = 'Los archivos no pueden exceder las ' + maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
                     }
                     else {
-                        message = 'Hay archivos que exceden las ' + app.Settings.security.maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
+                        message = 'Hay archivos que exceden las ' + maxRequestFileUploadMB + 'MB. Subir archivos de menor peso.';
                     }
 
                     exceptionService.handle({ data: { error: { message: message } } });

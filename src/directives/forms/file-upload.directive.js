@@ -56,11 +56,11 @@
                         errorExtensions = true;
                     }
                     else if (validatehorizontal == '1') {
-                        validateHorizontalImage(fileUpload.files[i], fileUpload.files.length);
+                        validateHorizontalImage(serviceUrl, fileUpload.files[i], fileUpload.files.length);
                     }
                     else
                     {
-                        postFileToServer(fileUpload.files[i]);
+                        postFileToServer(serviceUrl, fileUpload.files[i]);
                     }
                 }
 
@@ -103,15 +103,15 @@
                 }
             }
 
-            function postFileToServer(file)
+            function postFileToServer(url, file)
             {
-                fileService.post(file, scope.defaultname, onProgress, iFileSent)
+                fileService.post(url, file, scope.defaultname, onProgress, iFileSent)
                     .then(postCompleted)
                     .catch(exceptionService.handle);
                 iFileSent++;
             }
 
-            function validateHorizontalImage(file, totalImages)
+            function validateHorizontalImage(url, file, totalImages)
             {
                 var _URL = window.URL || window.webkitURL;
                 if (_URL) {
@@ -120,7 +120,7 @@
                     img.onload = function () {
                         var y = scope.defaultname;
                         if (img.height <= img.width) {
-                            postFileToServer(file);
+                            postFileToServer(url, file);
                         }
                         else
                         {

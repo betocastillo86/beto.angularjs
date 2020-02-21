@@ -44,7 +44,7 @@
             return getCurrentUser().role === 'Admin';
         }
 		
-		function hasPermission(permisssion) {
+		function hasPermission(permission) {
             var currentUser = getCurrentUser();
             for (var i = 0; i < currentUser.permissions.length; i++) {
                 if (currentUser.permissions[i] == permission) {

@@ -45,7 +45,7 @@
         }
 		
 		function hasPermission(permisssion) {
-            var currentUser = sessionService.getCurrentUser();
+            var currentUser = getCurrentUser();
             for (var i = 0; i < currentUser.permissions.length; i++) {
                 if (currentUser.permissions[i] == permission) {
                     return true;

@@ -14,7 +14,8 @@
             getCurrentUser: getCurrentUser,
             getToken: getToken,
             isAuthenticated: isAuthenticated,
-            isAdmin: isAdmin
+            isAdmin: isAdmin,
+			hasPermission: hasPermission
         };
 
         return service;
@@ -41,6 +42,16 @@
 
         function isAdmin() {
             return getCurrentUser().role === 'Admin';
+        }
+		
+		function hasPermission(permisssion) {
+            var currentUser = sessionService.getCurrentUser();
+            for (var i = 0; i < currentUser.permissions.length; i++) {
+                if (currentUser.permissions[i] == permission) {
+                    return true;
+                }
+            }
+			return false;
         }
     }
 })();

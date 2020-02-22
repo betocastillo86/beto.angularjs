@@ -46,11 +46,16 @@
 		
 		function hasPermission(permission) {
             var currentUser = getCurrentUser();
-            for (var i = 0; i < currentUser.permissions.length; i++) {
-                if (currentUser.permissions[i] == permission) {
-                    return true;
-                }
-            }
+			
+			if(currentUser && currentUser.permissions)
+			{
+				for (var i = 0; i < currentUser.permissions.length; i++) {
+					if (currentUser.permissions[i] == permission) {
+						return true;
+					}
+				}	
+			}
+            
 			return false;
         }
     }
